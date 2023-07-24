@@ -51,7 +51,6 @@ class Server:
         }
 
 
-
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     '''  function that takes two integer arguments page and page_size
     '''
