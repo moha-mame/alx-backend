@@ -6,7 +6,7 @@ from base_caching import BaseCaching
 
 class LFUCache(BaseCaching):
     """
-    LFUCache class represents a Least Frequently Used (LFU) caching system without a size limit.
+    LFUCache class represents a Least Frequently Used (LFU)t.
     Methods:
         put(key, item): Add a key/value pair to the cache.
         get(key): Get the value associated with the given key from the cache.
@@ -21,8 +21,7 @@ class LFUCache(BaseCaching):
         """Add an item to the LFU cache."""
         if key is None or item is None:
             return
-
-        # Check if the cache is full and evict the least frequently used item if necessary.
+            
         if len(self.cache_data) == self.MAX_ITEMS and key not in self.cache_data:
             least_used_key = min(self.key_uses, key=self.key_uses.get)
             del self.cache_data[least_used_key]
