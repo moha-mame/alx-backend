@@ -21,7 +21,6 @@ class LFUCache(BaseCaching):
         """Add an item to the LFU cache."""
         if key is None or item is None:
             return
-            
         if len(self.cache_data) == self.MAX_ITEMS and key not in self.cache_data:
             least_used_key = min(self.key_uses, key=self.key_uses.get)
             del self.cache_data[least_used_key]
