@@ -22,7 +22,7 @@ class LFUCache(BaseCaching):
         if key is None or item is None:
             return
         if len(self.cache_data) == self.MAX_ITEMS and key not in self.cache_data:
-        least_used_key = min(self.key_uses, key=self.key_uses.get)
+            least_used_key = min(self.key_uses, key=self.key_uses.get)
             del self.cache_data[least_used_key]
             del self.key_uses[least_used_key]
             print("DISCARD: {}".format(least_used_key))
