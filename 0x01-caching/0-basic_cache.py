@@ -27,10 +27,10 @@ class BasicCache(BaseCaching):
             key: The key whose value needs to be retrieved.
 
         Returns:
-            The item associated with the key if it exists in the cache, None otherwise.
+            The item associated with the key if it exists in the cache.
 
         Note:
-            If key is None or if the key doesn’t exist in the cache, return None.
+            If key is None or if the key doesn’t exist in the cache.
         """
         if key is not None and key in self.cache_data:
             return self.cache_data[key]
