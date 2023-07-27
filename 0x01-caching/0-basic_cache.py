@@ -7,7 +7,7 @@ BaseCaching = __import__("base_caching").BaseCaching
 
 
 class BasicCache(BaseCaching):
-     def put(self, key, item):
+    def put(self, key, item):
         """
         Store an item in the cache with the provided key.
 
