@@ -1,52 +1,33 @@
 #!/usr/bin/env python3
 """First-In First-Out caching module.
 """
+from collections import OrderedDict
+
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
+    """Represents an object that allows storing and
+    retrieving items from a dictionary with a FIFO
+    removal mechanism when the limit is reached.
+    """
     def __init__(self):
-        """
-        Initialize the FIFO cache.
+        """Initializes the cache.
         """
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
+        """Adds an item in the cache.
         """
-        Store an item in the FIFO cache with the provided key.
-
-        Args:
-            key: The key to associate with the item in the cache.
-            item: The item to be stored in the cache.
-
-        Note:
-            If key or item is None, this method does nothing.
-            If the number of items in self.cache_data is higher than BaseCaching.MAX_ITEMS,
-            the method will discard the first item put in the cache using FIFO algorithm.
-        """
-        if key is not None and item is not None:
-            if len(self.cache_data) >= self.MAX_ITEMS:
-                # Get the first key in the cache (FIFO)
-                first_key = next(iter(self.cache_data))
-                # Discard the item associated with the first key
-                del self.cache_data[first_key]
-                print(f"DISCARD: {first_key}\n")
-
-            self.cache_data[key] = item
+        if key is None or item is None:
+            return
+        self.cache_data[key] = item
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            first_key, _ = self.cache_data.popitem(False)
+            print("DISCARD:", first_key)
 
     def get(self, key):
+        """Retrieves an item by key.
         """
-        Retrieve the item associated with the given key from the FIFO cache.
-
-        Args:
-            key: The key whose value needs to be retrieved.
-
-        Returns:
-            The item associated with the key if it exists in the cache, None otherwise.
-
-        Note:
-            If key is None or if the key doesn’t exist in the cache, return None.
-        """
-        if key is not None and key in self.cache_data:
-            return self.cache_data[key]
-        return None
+        return self.cache_data.get(key, None)
